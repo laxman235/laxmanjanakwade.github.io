@@ -370,55 +370,108 @@
         <p>Some of the featured projects I've worked on recently.</p>
       </div>
     </div>
+<style>
+  body {
+    background-color: #121212;
+    color: #f5f5f5;
+  }
 
-    <div class="row">
+  .blog-entry {
+    background-color: #1e1e1e;
+    border: 1px solid #2c2c2c;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 2px 10px rgba(255, 255, 255, 0.05);
+    transition: all 0.3s ease;
+  }
 
-     <!-- Project 1 -->
-<div class="col-md-4 d-flex ftco-animate">
-  <div class="blog-entry">
-    <a href="https://github.com/laxman235/ATM-Simulator-System-master" class="block-20 zoom-effect" style="background-image: url('images/atm_project.jpg.png');"></a>
-    <div class="text mt-3">
-      <h3 class="heading"><a href="https://github.com/laxman235/ATM-Simulator-System-master">ATM Simulator System</a></h3>
-      <p>A simple ATM system built with Java, covering core banking functionalities like withdraw, deposit, and balance check.</p>
-      <a href="https://github.com/laxman235/ATM-Simulator-System-master" target="_blank" class="btn btn-sm btn-primary mt-2">View on GitHub</a>
+  .blog-entry:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(255, 255, 255, 0.1);
+  }
+
+  .block-20 {
+    border-radius: 8px;
+    background-size: cover;
+    background-position: center;
+    height: 220px;
+    width: 100%;
+  }
+
+  .blog-entry .heading a,
+  .blog-entry p,
+  .blog-entry a.btn {
+    color: #ffffff;
+  }
+
+  .blog-entry a.btn.btn-primary {
+    background-color: #007bff;
+    border: none;
+  }
+
+  .blog-entry a.btn.btn-primary:hover {
+    background-color: #0056b3;
+  }
+
+  a.btn.btn-primary {
+    color: #fff;
+  }
+</style>
+
+<div class="row">
+
+  <!-- Project 1 -->
+  <div class="col-md-4 d-flex ftco-animate">
+    <div class="blog-entry">
+      <a href="https://github.com/laxman235/ATM-Simulator-System-master" class="block-20 zoom-effect"
+        style="background-image: url('images/atm_project.jpg.png');"></a>
+      <div class="text mt-3">
+        <h3 class="heading"><a href="https://github.com/laxman235/ATM-Simulator-System-master">ATM Simulator System</a></h3>
+        <p>A simple ATM system built with Java, covering core banking functionalities like withdraw, deposit, and balance check.</p>
+        <a href="https://github.com/laxman235/ATM-Simulator-System-master" target="_blank" class="btn btn-sm btn-primary mt-2">View on GitHub</a>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- Project 2 -->
-<div class="col-md-4 d-flex ftco-animate">
-  <div class="blog-entry">
-    <a href="https://github.com/laxman235/invoice-app" class="block-20 zoom-effect" style="background-image: url('images/invoice_project.png');"></a>
-    <div class="text mt-3">
-      <h3 class="heading"><a href="https://github.com/laxman235/invoice-app">Invoice Management System</a></h3>
-      <p>A React + Node.js web app to create, update, and manage client invoices with PDF export and secure login.</p>
-      <a href="https://github.com/laxman235/invoice-app" target="_blank" class="btn btn-sm btn-primary mt-2">View on GitHub</a>
+  <!-- Project 2 -->
+  <div class="col-md-4 d-flex ftco-animate">
+    <div class="blog-entry">
+      <a href="https://github.com/laxman235/invoice-app" class="block-20 zoom-effect"
+        style="background-image: url('images/invoice_project.png');"></a>
+      <div class="text mt-3">
+        <h3 class="heading"><a href="https://github.com/laxman235/invoice-app">Invoice Management System</a></h3>
+        <p>A React + Node.js web app to create, update, and manage client invoices with PDF export and secure login.</p>
+        <a href="https://github.com/laxman235/invoice-app" target="_blank" class="btn btn-sm btn-primary mt-2">View on GitHub</a>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- Project 3 -->
-<div class="col-md-4 d-flex ftco-animate">
-  <div class="blog-entry">
-    <a href="https://github.com/laxman235/crud-application" class="block-20 zoom-effect" style="background-image: url('images/CRUD.jpeg');"></a>
-    <div class="text mt-3">
-      <h3 class="heading"><a href="https://github.com/laxman235/crud-application">Crud Application</a></h3>
-      <p>Spring Boot application to post, apply, and manage job listings, including admin and user modules.</p>
-      <a href="https://github.com/laxman235/crud-application" target="_blank" class="btn btn-sm btn-primary mt-2">View on GitHub</a>
+  <!-- Project 3 -->
+  <div class="col-md-4 d-flex ftco-animate">
+    <div class="blog-entry">
+      <a href="https://github.com/laxman235/crud-application" class="block-20 zoom-effect"
+        style="background-image: url('images/CRUD.jpeg');"></a>
+      <div class="text mt-3">
+        <h3 class="heading"><a href="https://github.com/laxman235/crud-application">Crud Application</a></h3>
+        <p>Spring Boot application to post, apply, and manage job listings, including admin and user modules.</p>
+        <a href="https://github.com/laxman235/crud-application" target="_blank" class="btn btn-sm btn-primary mt-2">View on GitHub</a>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- Project 4 -->
-<div class="col-md-4 d-flex ftco-animate">
-  <div class="blog-entry">
-    <a href="https://github.com/laxman235/employee-management-system" class="block-20 zoom-effect" style="background-image: url('images/Employe.png');"></a>
-    <div class="text mt-3">
-      <h3 class="heading"><a href="https://github.com/laxman235/employee-management-system">Employee Management System</a></h3>
-      <p>Tracks employee data, roles, departments, salaries, attendance, and performance with CRUD operations using Java, Spring Boot, and MySQL.</p>
-      <a href="https://github.com/laxman235/employee-management-system" target="_blank" class="btn btn-sm btn-primary mt-2">View on GitHub</a>
+  <!-- Project 4 -->
+  <div class="col-md-4 d-flex ftco-animate">
+    <div class="blog-entry">
+      <a href="https://github.com/laxman235/employee-management-system" class="block-20 zoom-effect"
+        style="background-image: url('images/Employe.png');"></a>
+      <div class="text mt-3">
+        <h3 class="heading"><a href="https://github.com/laxman235/employee-management-system">Employee Management System</a></h3>
+        <p>Tracks employee data, roles, departments, salaries, attendance, and performance with CRUD operations using Java, Spring Boot, and MySQL.</p>
+        <a href="https://github.com/laxman235/employee-management-system" target="_blank" class="btn btn-sm btn-primary mt-2">View on GitHub</a>
+      </div>
     </div>
   </div>
+
 </div>
 
 </section>
