@@ -9789,3 +9789,50 @@ a.btn.btn-primary {
   color: #fff;
 }
 
+.btn-animated {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 25px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 50px;
+  text-decoration: none;
+  color: white;
+  overflow: hidden;
+  transition: all 0.4s ease;
+}
+
+.btn-animated i {
+  margin-right: 10px;
+  transition: transform 0.3s ease;
+}
+
+.btn-animated:hover i {
+  transform: translateX(5px);
+}
+
+/* LinkedIn Button */
+.btn-linkedin {
+  background: #0077b5;
+  border: 2px solid #0077b5;
+}
+.btn-linkedin:hover {
+  background: transparent;
+  color: #0077b5;
+  box-shadow: 0 0 15px #0077b5;
+}
+
+/* GitHub Button */
+.btn-github {
+  background: #333;
+  border: 2px solid #333;
+}
+.btn-github:hover {
+  background: transparent;
+  color: #333;
+  box-shadow: 0 0 15px #333;
+}
+
+
