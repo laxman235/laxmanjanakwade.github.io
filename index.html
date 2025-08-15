@@ -569,6 +569,31 @@
     </div>
   </div>
 </section>
+	  <!-- LeetCode Stats Section -->
+<div class="col-md-6 d-flex justify-content-center align-items-center flex-column text-center">
+  <div class="counter-wrap ftco-animate mt-md-3">
+    <div class="text">
+      <p class="mb-4">
+        <span>LeetCode ID: </span><strong id="leetcode-username">laxman235</strong><br>
+        <span>Rank: </span><strong id="leetcode-rank">Loading...</strong>
+      </p>
+      <p>
+        <a href="https://leetcode.com/laxman235" target="_blank" class="btn btn-primary py-3 px-3">View Profile</a>
+      </p>
+    </div>
+  </div>
+</div>
+
+<script>
+  async function getLeetCodeStats(username) {
+    const response = await fetch(`https://leetcode-stats-api.herokuapp.com/${username}`);
+    const data = await response.json();
+    document.getElementById("leetcode-rank").textContent = data.ranking || "N/A";
+  }
+
+  getLeetCodeStats("laxman235");
+</script>
+
 
 <!-- GitHub Section -->
 <section class="ftco-section ftco-hireme img margin-top" style="background-image: url(images/bg_1.jpg);">
