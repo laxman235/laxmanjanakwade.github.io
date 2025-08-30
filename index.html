@@ -600,7 +600,7 @@
 <script>
   async function getLeetCodeStats(username) {
     try {
-      const response = await fetch(`https://leetcode-stats-api.herokuapp.com/${username}`);
+      const response = await fetch(`https://leetcode-stats-api.vercel.app/${username}`);
       const data = await response.json();
       document.getElementById("leetcode-rank").textContent = data.ranking || "N/A";
     } catch (error) {
@@ -609,6 +609,7 @@
   }
   getLeetCodeStats("laxman235");
 </script>
+
 
 
 
