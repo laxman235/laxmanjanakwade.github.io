@@ -9848,4 +9848,10 @@ a.btn.btn-primary {
   margin: 0 auto;
 }
 
+/* keep counter row centered and prevent stray template rules from shifting it */
+#section-counter .container { width:100%; margin:0 auto; padding-left:15px; padding-right:15px; box-sizing:border-box; }
+#section-counter .row { margin:0 auto; }
+#section-counter .block-18 { display:block !important; margin:0 auto; }
+
+
 
