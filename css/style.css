@@ -9834,5 +9834,18 @@ a.btn.btn-primary {
   color: #333;
   box-shadow: 0 0 15px #333;
 }
+/* ensure the counter row is centered and not affected by other .img or .ftco-counter rules */
+#section-counter .container,
+#section-counter .row {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#section-counter .block-18 {
+  display: block !important;
+  margin: 0 auto;
+}
 
 
