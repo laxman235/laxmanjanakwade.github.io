@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Laxman Janakwade - Java Practice Code</title>
+    <title>Laxman Janakwade - Java Code Lab</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
@@ -14,90 +14,136 @@
     
     <style>
         body { background-color: #121212; color: #fff; }
-        .code-block-container {
+        .editor-card {
             background: #1e1e1e;
-            border-radius: 10px;
+            border: 2px solid #ffbd39;
+            border-radius: 15px;
             padding: 25px;
-            margin-bottom: 40px;
-            border: 1px solid #2c2c2c;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            margin-bottom: 50px;
         }
-        .code-title { color: #ffbd39; font-weight: 700; margin-bottom: 15px; }
-        .navbar-brand { font-weight: 800; font-size: 20px; text-transform: uppercase; }
+        .form-control {
+            background: #2c2c2c;
+            border: 1px solid #444;
+            color: #fff;
+            font-family: 'Courier New', monospace;
+        }
+        .form-control:focus { background: #333; color: #ffbd39; border-color: #ffbd39; }
+        .code-display-card {
+            background: #1a1a1a;
+            border-left: 5px solid #ffbd39;
+            padding: 20px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .btn-submit { background: #ffbd39; color: #000; font-weight: 700; border: none; }
+        .delete-btn { position: absolute; top: 10px; right: 10px; color: #ff4444; cursor: pointer; }
     </style>
 </head>
 <body>
-	  
-    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light" id="ftco-navbar">
-	    <div class="container">
-	      <a class="navbar-brand" href="index.html">Laxman Janakwade</a>
-	      <div class="collapse navbar-collapse" id="ftco-nav">
-	        <ul class="navbar-nav nav ml-auto">
-	          <li class="nav-item"><a href="index.html" class="nav-link"><span>Back to Portfolio</span></a></li>
-	        </ul>
-	      </div>
-	    </div>
-	</nav>
 
-    <section class="ftco-section pt-5">
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light">
         <div class="container">
-            <div class="row justify-content-center mb-5">
-                <div class="col-md-7 heading-section text-center ftco-animate">
-                    <h1 class="big big-2">Code</h1>
-                    <h2 class="mb-4">Java Practice Repository</h2>
-                    <div class="underline"></div>
-                    <p>Below is a collection of Java algorithms and logic snippets I've been practicing.</p>
+            <a class="navbar-brand" href="index.html">Laxman Janakwade</a>
+            <a href="index.html" class="btn btn-outline-warning btn-sm">Back to Portfolio</a>
+        </div>
+    </nav>
+
+    <section class="ftco-section">
+        <div class="container">
+            <div class="row justify-content-center mb-4">
+                <div class="col-md-8 text-center heading-section ftco-animate">
+                    <h2 class="mb-4">Java Code Manager</h2>
+                    <p>Add your local practice code below to save it to this block.</p>
+                </div>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-md-10 editor-card ftco-animate">
+                    <div class="form-group">
+                        <label>Snippet Title</label>
+                        <input type="text" id="codeTitle" class="form-control" placeholder="e.g., Binary Search Tree">
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea id="codeDesc" class="form-control" rows="2" placeholder="What does this code do?"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Java Code</label>
+                        <textarea id="javaCode" class="form-control" rows="8" placeholder="public class MyClass { ... }"></textarea>
+                    </div>
+                    <button class="btn btn-submit px-5 py-3" onclick="saveCode()">Submit & Save to Block</button>
                 </div>
             </div>
 
             <div class="row">
-                <div class="col-md-12">
-                    
-                    <div class="code-block-container ftco-animate">
-                        <h4 class="code-title">1. Reverse an Array</h4>
-                        <p>A simple algorithm to reverse an array in-place.</p>
-                        <pre><code class="language-java">
-public class ArrayReverse {
-    public static void reverse(int[] arr) {
-        int start = 0, end = arr.length - 1;
-        while (start < end) {
-            int temp = arr[start];
-            arr[start] = arr[end];
-            arr[end] = temp;
-            start++;
-            end--;
-        }
-    }
-}
-                        </code></pre>
-                    </div>
-
-                    <div class="code-block-container ftco-animate">
-                        <h4 class="code-title">2. Basic REST Controller</h4>
-                        <p>Standard Spring Boot REST API controller structure.</p>
-                        <pre><code class="language-java">
-@RestController
-@RequestMapping("/api/practice")
-public class TestController {
-    
-    @GetMapping("/hello")
-    public String sayHello() {
-        return "Java Practice Page is Live!";
-    }
-}
-                        </code></pre>
-                    </div>
-
+                <div class="col-md-12" id="codeContainer">
                     </div>
             </div>
         </div>
     </section>
 
+    <script>
+        // Function to Save Code to LocalStorage and Display it
+        function saveCode() {
+            const title = document.getElementById('codeTitle').value;
+            const desc = document.getElementById('codeDesc').value;
+            const code = document.getElementById('javaCode').value;
+
+            if (!title || !code) { alert("Please fill Title and Code!"); return; }
+
+            const snippet = { title, desc, code, id: Date.now() };
+
+            // 1. Get existing snippets
+            let snippets = JSON.parse(localStorage.getItem('myJavaCode')) || [];
+            
+            // 2. Add new one
+            snippets.unshift(snippet);
+            
+            // 3. Save back to localStorage
+            localStorage.setItem('myJavaCode', JSON.stringify(snippets));
+
+            // 4. Clear fields and Refresh display
+            document.getElementById('codeTitle').value = '';
+            document.getElementById('codeDesc').value = '';
+            document.getElementById('javaCode').value = '';
+            loadSnippets();
+        }
+
+        function loadSnippets() {
+            const container = document.getElementById('codeContainer');
+            const snippets = JSON.parse(localStorage.getItem('myJavaCode')) || [];
+            
+            container.innerHTML = '';
+            
+            snippets.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'code-display-card ftco-animate fadeInUp ftco-animated';
+                div.innerHTML = `
+                    <span class="delete-btn" onclick="deleteSnippet(${item.id})">Delete ✖</span>
+                    <h4 style="color: #ffbd39;">${item.title}</h4>
+                    <p>${item.desc}</p>
+                    <pre><code class="language-java">${item.code}</code></pre>
+                `;
+                container.appendChild(div);
+            });
+
+            // Re-run Prism for highlighting new content
+            if (window.Prism) Prism.highlightAll();
+        }
+
+        function deleteSnippet(id) {
+            let snippets = JSON.parse(localStorage.getItem('myJavaCode')) || [];
+            snippets = snippets.filter(s => s.id !== id);
+            localStorage.setItem('myJavaCode', JSON.stringify(snippets));
+            loadSnippets();
+        }
+
+        // Load snippets on page start
+        window.onload = loadSnippets;
+    </script>
+
     <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.waypoints.min.js"></script>
     <script src="js/main.js"></script>
-    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
 </body>
