@@ -13,30 +13,64 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
     
     <style>
-        body { background-color: #121212; color: #fff; }
+        /* This section makes the UI visible */
+        body { 
+            background-color: #000000 !important; 
+            color: #fff; 
+        }
+        
         .editor-card {
             background: #1e1e1e;
             border: 2px solid #ffbd39;
             border-radius: 15px;
             padding: 25px;
             margin-bottom: 50px;
+            margin-top: 20px;
         }
+
         .form-control {
-            background: #2c2c2c;
-            border: 1px solid #444;
-            color: #fff;
-            font-family: 'Courier New', monospace;
+            background: #2c2c2c !important;
+            border: 1px solid #444 !important;
+            color: #fff !important;
+            margin-bottom: 15px;
         }
-        .form-control:focus { background: #333; color: #ffbd39; border-color: #ffbd39; }
+
+        .form-control:focus {
+            border-color: #ffbd39 !important;
+            box-shadow: none;
+        }
+
         .code-display-card {
             background: #1a1a1a;
             border-left: 5px solid #ffbd39;
-            padding: 20px;
-            margin-bottom: 20px;
+            padding: 25px;
+            margin-bottom: 30px;
             position: relative;
+            border-radius: 0 10px 10px 0;
         }
-        .btn-submit { background: #ffbd39; color: #000; font-weight: 700; border: none; }
-        .delete-btn { position: absolute; top: 10px; right: 10px; color: #ff4444; cursor: pointer; }
+
+        .btn-submit { 
+            background: #ffbd39 !important; 
+            color: #000 !important; 
+            font-weight: 700; 
+            border: none; 
+            width: 100%;
+            text-transform: uppercase;
+        }
+
+        .delete-btn { 
+            position: absolute; 
+            top: 15px; 
+            right: 15px; 
+            color: #ff4444; 
+            cursor: pointer; 
+            font-weight: bold;
+        }
+
+        label { color: #ffbd39; font-weight: 600; }
+        
+        /* Navbar fix for secondary page */
+        .ftco-navbar-light { background: #000 !important; top: 0 !important; }
     </style>
 </head>
 <body>
@@ -44,34 +78,36 @@
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light">
         <div class="container">
             <a class="navbar-brand" href="index.html">Laxman Janakwade</a>
-            <a href="index.html" class="btn btn-outline-warning btn-sm">Back to Portfolio</a>
+            <div class="ml-auto">
+                <a href="index.html" class="btn btn-primary py-2 px-3">Back to Portfolio</a>
+            </div>
         </div>
     </nav>
 
     <section class="ftco-section">
         <div class="container">
             <div class="row justify-content-center mb-4">
-                <div class="col-md-8 text-center heading-section ftco-animate">
-                    <h2 class="mb-4">Java Code Manager</h2>
-                    <p>Add your local practice code below to save it to this block.</p>
+                <div class="col-md-8 text-center heading-section">
+                    <h2 class="mb-4" style="color: #ffbd39;">Java Code Manager</h2>
+                    <p>Enter your code snippets below. They will be saved in your browser's storage.</p>
                 </div>
             </div>
 
             <div class="row justify-content-center">
-                <div class="col-md-10 editor-card ftco-animate">
+                <div class="col-md-10 editor-card">
                     <div class="form-group">
                         <label>Snippet Title</label>
-                        <input type="text" id="codeTitle" class="form-control" placeholder="e.g., Binary Search Tree">
+                        <input type="text" id="codeTitle" class="form-control" placeholder="e.g., Binary Search">
                     </div>
                     <div class="form-group">
                         <label>Description</label>
-                        <textarea id="codeDesc" class="form-control" rows="2" placeholder="What does this code do?"></textarea>
+                        <textarea id="codeDesc" class="form-control" rows="2" placeholder="Briefly explain the logic..."></textarea>
                     </div>
                     <div class="form-group">
                         <label>Java Code</label>
-                        <textarea id="javaCode" class="form-control" rows="8" placeholder="public class MyClass { ... }"></textarea>
+                        <textarea id="javaCode" class="form-control" rows="8" placeholder="public class Main { ... }"></textarea>
                     </div>
-                    <button class="btn btn-submit px-5 py-3" onclick="saveCode()">Submit & Save to Block</button>
+                    <button class="btn btn-submit py-3" onclick="saveCode()">Submit & Save to Block</button>
                 </div>
             </div>
 
@@ -82,68 +118,70 @@
         </div>
     </section>
 
+    <script src="js/jquery.min.js"></script>
+    <script src="js/main.js"></script>
+    
     <script>
-        // Function to Save Code to LocalStorage and Display it
         function saveCode() {
             const title = document.getElementById('codeTitle').value;
             const desc = document.getElementById('codeDesc').value;
             const code = document.getElementById('javaCode').value;
 
-            if (!title || !code) { alert("Please fill Title and Code!"); return; }
+            if (!title || !code) { 
+                alert("Please fill out at least the Title and Code!"); 
+                return; 
+            }
 
             const snippet = { title, desc, code, id: Date.now() };
-
-            // 1. Get existing snippets
             let snippets = JSON.parse(localStorage.getItem('myJavaCode')) || [];
-            
-            // 2. Add new one
             snippets.unshift(snippet);
-            
-            // 3. Save back to localStorage
             localStorage.setItem('myJavaCode', JSON.stringify(snippets));
 
-            // 4. Clear fields and Refresh display
+            // Reset form
             document.getElementById('codeTitle').value = '';
             document.getElementById('codeDesc').value = '';
             document.getElementById('javaCode').value = '';
+            
             loadSnippets();
         }
 
         function loadSnippets() {
             const container = document.getElementById('codeContainer');
             const snippets = JSON.parse(localStorage.getItem('myJavaCode')) || [];
-            
             container.innerHTML = '';
             
             snippets.forEach(item => {
                 const div = document.createElement('div');
-                div.className = 'code-display-card ftco-animate fadeInUp ftco-animated';
+                div.className = 'code-display-card';
                 div.innerHTML = `
                     <span class="delete-btn" onclick="deleteSnippet(${item.id})">Delete ✖</span>
-                    <h4 style="color: #ffbd39;">${item.title}</h4>
-                    <p>${item.desc}</p>
-                    <pre><code class="language-java">${item.code}</code></pre>
+                    <h4 style="color: #ffbd39; margin-top: 10px;">${item.title}</h4>
+                    <p style="color: #bbb;">${item.desc}</p>
+                    <pre><code class="language-java">${escapeHtml(item.code)}</code></pre>
                 `;
                 container.appendChild(div);
             });
 
-            // Re-run Prism for highlighting new content
             if (window.Prism) Prism.highlightAll();
         }
 
         function deleteSnippet(id) {
-            let snippets = JSON.parse(localStorage.getItem('myJavaCode')) || [];
-            snippets = snippets.filter(s => s.id !== id);
-            localStorage.setItem('myJavaCode', JSON.stringify(snippets));
-            loadSnippets();
+            if(confirm("Are you sure you want to delete this?")) {
+                let snippets = JSON.parse(localStorage.getItem('myJavaCode')) || [];
+                snippets = snippets.filter(s => s.id !== id);
+                localStorage.setItem('myJavaCode', JSON.stringify(snippets));
+                loadSnippets();
+            }
         }
 
-        // Load snippets on page start
+        // Helper to prevent HTML symbols from breaking the code display
+        function escapeHtml(text) {
+            return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        }
+
         window.onload = loadSnippets;
     </script>
 
-    <script src="js/jquery.min.js"></script>
-    <script src="js/main.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
 </body>
