@@ -1,1 +1,104 @@
-<li class="nav-item"><a href="index.html" class="nav-link"><span>Back to Portfolio</span></a></li>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Laxman Janakwade - Java Practice Code</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    
+    <style>
+        body { background-color: #121212; color: #fff; }
+        .code-block-container {
+            background: #1e1e1e;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 40px;
+            border: 1px solid #2c2c2c;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        .code-title { color: #ffbd39; font-weight: 700; margin-bottom: 15px; }
+        .navbar-brand { font-weight: 800; font-size: 20px; text-transform: uppercase; }
+    </style>
+</head>
+<body>
+	  
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light" id="ftco-navbar">
+	    <div class="container">
+	      <a class="navbar-brand" href="index.html">Laxman Janakwade</a>
+	      <div class="collapse navbar-collapse" id="ftco-nav">
+	        <ul class="navbar-nav nav ml-auto">
+	          <li class="nav-item"><a href="index.html" class="nav-link"><span>Back to Portfolio</span></a></li>
+	        </ul>
+	      </div>
+	    </div>
+	</nav>
+
+    <section class="ftco-section pt-5">
+        <div class="container">
+            <div class="row justify-content-center mb-5">
+                <div class="col-md-7 heading-section text-center ftco-animate">
+                    <h1 class="big big-2">Code</h1>
+                    <h2 class="mb-4">Java Practice Repository</h2>
+                    <div class="underline"></div>
+                    <p>Below is a collection of Java algorithms and logic snippets I've been practicing.</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    
+                    <div class="code-block-container ftco-animate">
+                        <h4 class="code-title">1. Reverse an Array</h4>
+                        <p>A simple algorithm to reverse an array in-place.</p>
+                        <pre><code class="language-java">
+public class ArrayReverse {
+    public static void reverse(int[] arr) {
+        int start = 0, end = arr.length - 1;
+        while (start < end) {
+            int temp = arr[start];
+            arr[start] = arr[end];
+            arr[end] = temp;
+            start++;
+            end--;
+        }
+    }
+}
+                        </code></pre>
+                    </div>
+
+                    <div class="code-block-container ftco-animate">
+                        <h4 class="code-title">2. Basic REST Controller</h4>
+                        <p>Standard Spring Boot REST API controller structure.</p>
+                        <pre><code class="language-java">
+@RestController
+@RequestMapping("/api/practice")
+public class TestController {
+    
+    @GetMapping("/hello")
+    public String sayHello() {
+        return "Java Practice Page is Live!";
+    }
+}
+                        </code></pre>
+                    </div>
+
+                    </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.waypoints.min.js"></script>
+    <script src="js/main.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
+</body>
+</html>
