@@ -145,5 +145,33 @@
 
         window.onload = loadList;
     </script>
+    <script>
+        document.getElementById('fileInput').addEventListener('change', function(e) {
+            const displayArea = document.getElementById('displayArea');
+            const files = e.target.files;
+
+            for (let file of files) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const content = event.target.result;
+                    const fileBlock = document.createElement('div');
+                    fileBlock.className = 'col-md-12 ftco-animate fadeInUp ftco-animated';
+                    fileBlock.innerHTML = `
+                        <div class="code-container">
+                            <h4 class="code-title">${file.name}</h4>
+                            <pre><code class="language-java">${content.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</code></pre>
+                        </div>
+                    `;
+                    displayArea.prepend(fileBlock);
+                    
+                    // Trigger highlighting for the new code
+                    if (window.Prism) Prism.highlightAll();
+                };
+                reader.readAsText(file);
+            }
+        });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
 </body>
 </html>
