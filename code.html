@@ -5,65 +5,54 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
-    <link rel="icon" type="image/png" href="images/LJIcon.PNG">
-    
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
     <link rel="stylesheet" href="css/animate.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/ionicons.min.css">
-
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
     
     <style>
-        body { background-color: #000 !important; color: #fff; }
-        .editor-card { background: #1e1e1e; border: 2px solid #ffbd39; border-radius: 15px; padding: 25px; margin-bottom: 50px; margin-top: 20px; }
+        body { background-color: #000; color: #fff; }
+        .editor-card { background: #1e1e1e; border: 2px solid #ffbd39; border-radius: 15px; padding: 25px; margin-bottom: 50px; }
         .form-control { background: #2c2c2c !important; border: 1px solid #444 !important; color: #fff !important; margin-bottom: 15px; }
-        .code-display-card { background: #1a1a1a; border-left: 5px solid #ffbd39; padding: 25px; margin-bottom: 30px; position: relative; border-radius: 0 10px 10px 0; }
-        .btn-submit { background: #ffbd39; color: #000; font-weight: 700; border: none; width: 100%; text-transform: uppercase; }
-        .delete-btn { position: absolute; top: 15px; right: 15px; color: #ff4444; cursor: pointer; font-weight: bold; }
-        .output-box { background: #000; color: #00ff00; font-family: 'Courier New', monospace; padding: 15px; border: 1px solid #444; border-radius: 5px; margin-top: 10px; display: none; }
-        label { color: #ffbd39; font-weight: 600; }
-        .navbar-brand { font-weight: 800; font-size: 24px; text-transform: uppercase; }
+        .code-display-card { background: #1a1a1a; border-left: 5px solid #ffbd39; padding: 20px; margin-bottom: 20px; position: relative; border-radius: 0 10px 10px 0; }
+        .btn-submit { background: #ffbd39; color: #000; font-weight: 700; border: none; width: 100%; }
+        .delete-btn { position: absolute; top: 10px; right: 10px; color: #ff4444; cursor: pointer; }
+        label { color: #ffbd39; }
     </style>
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light" style="background: #000 !important; top: 0;">
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light">
         <div class="container">
             <a class="navbar-brand" href="index.html">Laxman Janakwade</a>
-            <div class="ml-auto">
-                <a href="index.html" class="btn btn-primary py-2 px-3">Back to Portfolio</a>
-            </div>
+            <a href="index.html" class="btn btn-primary py-2 px-3">Back to Portfolio</a>
         </div>
     </nav>
 
     <section class="ftco-section">
         <div class="container">
-            <div class="row justify-content-center mb-4">
-                <div class="col-md-8 text-center heading-section ftco-animate">
-                    <h2 class="mb-4" style="color: #ffbd39;">Java Code Lab</h2>
-                    <p>Add practice code, sync to GitHub, and run it directly in your browser.</p>
-                </div>
-            </div>
-
             <div class="row justify-content-center">
-                <div class="col-md-10 editor-card ftco-animate">
+                <div class="col-md-10 editor-card">
+                    <h3 class="mb-4" style="color: #ffbd39;">Java Code Manager</h3>
                     <div class="form-group">
                         <label>File Name / Title</label>
                         <input type="text" id="codeTitle" class="form-control" placeholder="e.g. BinarySearch">
                     </div>
                     <div class="form-group">
+                        <label>Description</label>
+                        <input type="text" id="codeDesc" class="form-control" placeholder="Practice for BST logic">
+                    </div>
+                    <div class="form-group">
                         <label>Java Code</label>
-                        <textarea id="javaCode" class="form-control" rows="10" placeholder="public class Main { public static void main(String[] args) { ... } }"></textarea>
+                        <textarea id="javaCode" class="form-control" rows="10" placeholder="Paste your code here..."></textarea>
                     </div>
                     <button class="btn btn-submit py-3" onclick="saveToGithub()">Submit & Sync to GitHub</button>
                 </div>
             </div>
 
             <div class="row">
-                <div class="col-md-12" id="codeContainer">
-                    </div>
+                <div class="col-md-12" id="codeContainer"></div>
             </div>
         </div>
     </section>
@@ -74,21 +63,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
 
     <script>
-        const CONFIG = {
-            username: 'laxman235',
-            repo: 'laxmanjanakwade.github.io',
-            rapidApiKey: 'YOUR_RAPIDAPI_KEY_HERE' // Replace with your Judge0 Key
-        };
+        const CONFIG = { username: 'laxman235', repo: 'laxmanjanakwade.github.io' };
 
-        // --- GitHub and Local Save Logic ---
         async function saveToGithub() {
             const title = document.getElementById('codeTitle').value;
             const code = document.getElementById('javaCode').value;
+            const desc = document.getElementById('codeDesc').value;
             const fileName = title.replace(/\s+/g, '_') + ".java";
 
             if (!title || !code) { alert("Title and Code are required!"); return; }
 
-            const token = prompt("Enter GitHub Personal Access Token:");
+            const token = prompt("Enter GitHub Access Token:");
             if (!token) return;
 
             const url = `https://api.github.com/repos/${CONFIG.username}/${CONFIG.repo}/contents/${fileName}`;
@@ -98,81 +83,39 @@
                     method: 'PUT',
                     headers: { 'Authorization': `token ${token}`, 'Content-Type': 'application/json' },
                     body: JSON.stringify({
-                        message: `Practice Code: ${title}`,
-                        content: btoa(code),
+                        message: `Practice: ${title}`,
+                        content: btoa(code), // Base64 encoding
                         branch: 'main'
                     })
                 });
 
                 if (response.ok) {
-                    alert("Sync Successful!");
-                    saveLocally(title, code);
+                    alert("Success! Code saved to your Git repo.");
+                    saveLocally(title, desc, code);
                 } else {
-                    alert("Sync failed. Check your token permissions.");
+                    alert("Sync failed. Check your token and repo permissions.");
                 }
-            } catch (e) { alert("Network error connecting to GitHub."); }
+            } catch (e) { alert("Error connecting to GitHub."); }
         }
 
-        function saveLocally(title, code) {
+        function saveLocally(title, desc, code) {
             let data = JSON.parse(localStorage.getItem('myJavaCode')) || [];
-            data.unshift({ title, code, id: Date.now() });
+            data.unshift({ title, desc, code, id: Date.now() });
             localStorage.setItem('myJavaCode', JSON.stringify(data));
             loadList();
         }
 
-        // --- Execution (Run) Logic ---
-        async function runCode(id) {
-            const code = document.getElementById(`raw-code-${id}`).textContent;
-            const outputBox = document.getElementById(`output-${id}`);
-            outputBox.style.display = "block";
-            outputBox.textContent = "Compiling and running...";
-
-            try {
-                const response = await fetch("https://judge0-ce.p.rapidapi.com/submissions?wait=true", {
-                    method: "POST",
-                    headers: {
-                        "x-rapidapi-host": "judge0-ce.p.rapidapi.com",
-                        "x-rapidapi-key": CONFIG.rapidApiKey,
-                        "content-type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        language_id: 62, // Java
-                        source_code: btoa(code)
-                    })
-                });
-
-                const result = await response.json();
-                const output = atob(result.stdout || result.stderr || result.compile_output || "No output");
-                outputBox.textContent = output;
-            } catch (err) {
-                outputBox.textContent = "Error: Check your API Key.";
-            }
-        }
-
-        // --- UI Rendering ---
         function loadList() {
             const container = document.getElementById('codeContainer');
             const data = JSON.parse(localStorage.getItem('myJavaCode')) || [];
-            
             container.innerHTML = data.map(item => `
-                <div class="code-display-card ftco-animate fadeInUp ftco-animated">
-                    <span class="delete-btn" onclick="deleteItem(${item.id})">Delete ✖</span>
+                <div class="code-display-card">
                     <h4 style="color: #ffbd39;">${item.title}</h4>
-                    <pre><code class="language-java" id="raw-code-${item.id}">${item.code.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</code></pre>
-                    <button class="btn btn-sm btn-outline-success" onclick="runCode('${item.id}')">Run Code</button>
-                    <div id="output-${item.id}" class="output-box"></div>
+                    <p>${item.desc}</p>
+                    <pre><code class="language-java">${item.code.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</code></pre>
                 </div>
             `).join('');
-            
             if (window.Prism) Prism.highlightAll();
-        }
-
-        function deleteItem(id) {
-            if(confirm("Delete this snippet?")) {
-                let data = JSON.parse(localStorage.getItem('myJavaCode')) || [];
-                localStorage.setItem('myJavaCode', JSON.stringify(data.filter(i => i.id !== id)));
-                loadList();
-            }
         }
 
         window.onload = loadList;
